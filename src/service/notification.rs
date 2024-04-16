@@ -90,4 +90,9 @@ impl NotificationService{
         return thread::spawn(move || Self::unsubscribe_request(product_type_clone))
             .join().unwrap();
     }
+
+    pub fn recieve_notification(payload: Notification) -> Result<Notification> {
+        let subscriber_result = NotificationRepository::add(payload.clone());
+        return Ok(subscriber_result);
+    }
 }
